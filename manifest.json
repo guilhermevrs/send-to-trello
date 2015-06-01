@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "Send to Trello",
+    "version": "0.0.0",
+    "default_locale": "en",
+    "description": "Send To Trello is a simple extension that enables you to quickly create a card in your trello board with the link of the current page",
+    "browser_action": {
+
+    },
+    "author": "Guilherme Vieira Schwade"
+    "background": {
+        "persistent": false
+    },
+}
