@@ -12,7 +12,9 @@
     "karma-chrome-launcher": "^0.1.12",
     "karma-jasmine": "^0.3.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "karma-firefox-launcher": "^0.1.6"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
