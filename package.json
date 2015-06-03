@@ -13,6 +13,7 @@
     "karma-jasmine": "^0.3.5"
   },
   "devDependencies": {
+    "bower": "^1.4.1",
     "karma-firefox-launcher": "^0.1.6"
   },
   "scripts": {
