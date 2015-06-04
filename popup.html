@@ -8,7 +8,11 @@
   </head>
   <body ng-controller="mainController">
     {{message}}
+    <div id="main">
+      <div ng-view></div>
+    </div>
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
