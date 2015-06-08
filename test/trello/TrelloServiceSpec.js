@@ -53,5 +53,15 @@ describe('TrelloService', function(){
             localStorage.setItem(TrelloService.LOCAL_STORAGE_AUTH_TOKEN, testValue);
             expect(TrelloService.isUserLogged()).toBe(true);
         });
+
+        it('should call correctly the Trello authorize function', function(){
+            spyOn(Trello, 'authorize');
+            TrelloService.authorize();
+            expect(Trello.authorize.calls.count()).toEqual(1);
+            var args = Trello.authorize.calls.argsFor(0)[0];
+            expect(args.type).toEqual('popup');
+            expect(args.name).toEqual('Send to Trello');
+            expect(args.scope).toEqual({read:true, write:true, account:false});
+        });
     });
 });

@@ -18,8 +18,9 @@ module.exports = function(config) {
       'bower_components/angular/angular.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-route/angular-route.min.js',
-      'test/**/*Spec.js',
-      'js/**/*.js'
+      'bower_components/jquery/dist/jquery.min.js',
+      'js/**/*.js',
+      'test/**/*Spec.js'
     ],
 
 
