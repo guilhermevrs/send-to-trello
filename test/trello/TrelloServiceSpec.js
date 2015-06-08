@@ -37,8 +37,21 @@ describe('TrelloService', function(){
             expect(localStorage[TrelloService.LOCAL_STORAGE_AUTH_TOKEN]).toEqual(testValue);
         });
 
+        it('should remove the authtoken', function(){
+            var testValue = 'test_value' + randomFloat;
+            localStorage.setItem(TrelloService.LOCAL_STORAGE_AUTH_TOKEN, testValue);
+            TrelloService.deleteLocalToken();
+            expect(localStorage[TrelloService.LOCAL_STORAGE_AUTH_TOKEN]).toEqual(undefined);
+        });
+
         it('should tell when the user is not logged in', function(){
             expect(TrelloService.isUserLogged()).toBe(false);
+        });
+
+        it('should tell when the user is logged in', function(){
+            var testValue = 'test_value' + randomFloat;
+            localStorage.setItem(TrelloService.LOCAL_STORAGE_AUTH_TOKEN, testValue);
+            expect(TrelloService.isUserLogged()).toBe(true);
         });
     });
 });

@@ -19,6 +19,11 @@ angular.module('app.trello', [])
             localStorage.setItem(this.LOCAL_STORAGE_AUTH_TOKEN, token);
         },
 
+        //Deletes the token
+        deleteLocalToken: function(){
+            localStorage.removeItem(this.LOCAL_STORAGE_AUTH_TOKEN);
+        },
+
         //Indicates if the user is logged
         isUserLogged: function(){
             var localAuthToken = this.getLocalToken();
