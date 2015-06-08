@@ -2,6 +2,7 @@
 'use strict';
 
 describe('TrelloService', function(){
+
     beforeEach(module('app.trello'));
 
     var TrelloService;
@@ -13,7 +14,7 @@ describe('TrelloService', function(){
 
     //GENERAL
     describe('in general service object', function(){
-        it('should exist a TrelloService module', function(){
+        it('should exist a TrelloService object', function(){
             expect(!!TrelloService).toBe(true);
         });
     });

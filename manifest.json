@@ -8,6 +8,9 @@
         "default_title": "Send to Trello",
         "default_popup": "popup.html"
     },
+    "permissions": [
+        "https://*.trello.com/"
+    ],
     "author": "Guilherme Vieira Schwade",
     "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
 }
