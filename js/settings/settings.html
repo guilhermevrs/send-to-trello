@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="app.settings" ng-csp>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="bower_components/angular/angular-csp.css" type="screen">
+    <title>Send to Trello</title>
+  </head>
+  <body ng-controller="mainController">
+    {{message}}
+    <div id="main">
+      <div ng-view></div>
+    </div>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="js/trello/trello-api.js"></script>
+    <script src="js/trello/TrelloService.js"></script>
+    <script src="js/settings/settings.js"></script>
+  </body>
+</html>

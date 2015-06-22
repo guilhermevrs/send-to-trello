@@ -60,9 +60,20 @@ describe('TrelloService', function(){
             TrelloService.authorize();
             expect(Trello.authorize.calls.count()).toEqual(1);
             var args = Trello.authorize.calls.argsFor(0)[0];
-            expect(args.type).toEqual('popup');
+            expect(args.type).toEqual('redirect');
+            expect(args.interactive).toEqual(true);
             expect(args.name).toEqual('Send to Trello');
             expect(args.scope).toEqual({read:true, write:true, account:false});
+        });
+
+        it('should call correctly the Trello authorize function', function(){
+            spyOn(Trello, 'authorize');
+
+            localStorage.setItem(TrelloService.LOCAL_STORAGE_AUTH_TOKEN, randomFloat);
+
+            TrelloService.authorize();
+            var args = Trello.authorize.calls.argsFor(0)[0];
+            expect(args.interactive).toEqual(false);
         });
     });
 });

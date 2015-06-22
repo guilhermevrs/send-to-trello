@@ -31,20 +31,21 @@ angular.module('app.trello', [])
         },
 
         authorize: function(){
-            var defered = $q.defer();
 	    var me = this;
+            var interactive = !this.isUserLogged();
 	    Trello.authorize({
-		type : 'popup',
+		type : 'redirect',
 		name : 'Send to Trello',
+                expiration: 'never',
+                interactive: interactive,
 		scope: { read: true, write: true, account: false },
 		success : function(){
-		    defered.resolve(me.getLocalToken());
+                    //Can't do nothing
 		},
 		error: function(error){
 		    console.error('[SendToTrello]', 'error on authorize', error);
 		}
 	    });
-	    return defered.promise;
         }
     };
 
