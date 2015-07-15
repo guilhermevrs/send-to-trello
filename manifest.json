@@ -16,5 +16,9 @@
     ],
     "author": "Guilherme Vieira Schwade",
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-    "options_page": "js/settings/settings.html"
+    "options_page": "js/settings/settings.html",
+    "web_accessible_resources": [
+        "js/*",
+        "bower_components/*"
+    ]
 }
