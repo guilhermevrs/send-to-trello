@@ -4,15 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="bower_components/angular/angular-csp.css" type="screen">
+      <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css">
+      <script src="/bower_components/material-design-lite/material.min.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Send to Trello</title>
   </head>
   <body ng-controller="mainController">
-    {{message}}
-    <div id="main">
-      <div ng-view></div>
+    <div id="main mdl-grid">
+      <form action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <input class="mdl-textfield__input" type="text" id="sample3" />
+          <label class="mdl-textfield__label" for="sample3">Text...</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+          <input class="mdl-textfield__input" type="text" id="sample4" />
+          <label class="mdl-textfield__label" for="sample4">Text...</label>
+        </div>
+      </form>
     </div>
     <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="js/trello/trello-api.js"></script>
     <script src="js/trello/TrelloService.js"></script>

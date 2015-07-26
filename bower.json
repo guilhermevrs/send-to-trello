@@ -17,7 +17,8 @@
   "dependencies": {
     "angular": "~1.4.0",
     "materialize": "~0.96.1",
-    "angular-route": "~1.4.0"
+    "angular-route": "~1.4.0",
+    "material-design-lite": "~1.0.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0",

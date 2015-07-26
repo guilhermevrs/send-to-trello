@@ -8,5 +8,6 @@ chrome.browserAction.onClicked.addListener(
             chrome.tabs.create({url: chrome.extension.getURL('js/settings/settings.html')});
             return true;
         } else {
+            chrome.browserAction.setPopup({popup:'app.html'});
         }
     });
