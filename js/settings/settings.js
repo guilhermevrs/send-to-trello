@@ -5,8 +5,10 @@ var settings = angular.module('app.settings',[
 ]);
 
 settings.controller('SettingsController', function($scope,TrelloService){
-    $scope.message = 'Settings';
+    $scope.message = '';
     TrelloService.authorize();
-    if (localStorage.gschrome.browserAction.setPopup({popup:'app.html'});
+    if (localStorage.getItem('trello_token')){
+        chrome.browserAction.setPopup({popup:'app.html'});
+        $scope.message = 'Trello account successfully linked';
     }
 });
