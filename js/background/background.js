@@ -11,3 +11,7 @@ chrome.browserAction.onClicked.addListener(
             chrome.browserAction.setPopup({popup:'app.html'});
         }
     });
+
+if (localStorage.getItem('trello_token')) {
+    chrome.browserAction.setPopup({popup:'app.html'});
+}
