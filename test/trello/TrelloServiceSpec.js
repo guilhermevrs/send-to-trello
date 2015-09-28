@@ -76,4 +76,25 @@ describe('TrelloService', function(){
             expect(args.interactive).toEqual(false);
         });
     });
+
+    //GET BOARDS
+    describe('in retrieving boards', function(){
+        beforeEach(function(){
+
+        });
+
+        it('should check if the account is connected first', function(){
+            spyOn(TrelloService, 'isUserLogged');
+            TrelloService.getBoards(false);
+            expect(TrelloService.isUserLogged).toHaveBeenCalled();
+        });
+
+        it('should redirect to authentication if user not logged', function(){
+            spyOn(TrelloService, 'authorize');
+            spyOn(TrelloService, 'isUserLogged').and.returnValue(false);
+            TrelloService.getBoards(false);
+            expect(TrelloService.authorize).toHaveBeenCalled();
+        });
+
+    });
 });

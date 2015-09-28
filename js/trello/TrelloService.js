@@ -1,4 +1,4 @@
-//TrelloService.js
+7//TrelloService.js
 
 'use strict';
 
@@ -46,6 +46,12 @@ angular.module('app.trello', [])
 		    console.error('[SendToTrello]', 'error on authorize', error);
 		}
 	    });
+        },
+
+        getBoards: function(includeClosed){
+            if(!this.isUserLogged()){
+               this.authorize();
+            }
         }
     };
 
