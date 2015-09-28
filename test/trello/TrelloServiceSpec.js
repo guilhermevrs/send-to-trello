@@ -86,6 +86,7 @@ describe('TrelloService', function(){
         });
 
         it('should check if the account is connected first', function(){
+            spyOn(Trello, 'get');
             TrelloService.getBoards(false);
             expect(TrelloService.isUserLogged).toHaveBeenCalled();
         });
@@ -113,6 +114,28 @@ describe('TrelloService', function(){
             var p = TrelloService.getBoards(false);
             var test = p instanceof Promise;
             expect(test).toBe(true);
+        });
+
+        it('should filter for non-closed boards', function(done){
+            spyOn(TrelloService, 'getLocalToken').and.returnValue(randomFloat);
+            spyOn(Trello, 'get').and.callFake(function(path,params,success){
+                success([
+                    {closed:true},
+                    {closed:false, id:3},
+                    {closed:true},
+                    {closed:false, id:4},
+                    {closed:false, id:5}
+                ]);
+            });
+            var p = TrelloService.getBoards(false);
+            p.then(function(boards){
+                expect(boards).toEqual([
+                    {closed:false, id:3},
+                    {closed:false, id:4},
+                    {closed:false, id:5}
+                ]);
+                done();
+            });
         });
     });
 });

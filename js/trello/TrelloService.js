@@ -55,7 +55,6 @@ angular.module('app.trello', [])
             }
 
             var defered = Promise.defer();
-
             Trello.get(
                '/member/me/boards',
                 {
@@ -63,7 +62,11 @@ angular.module('app.trello', [])
                     token: this.getLocalToken()
                 },
 		function(data){
-                    defered.resolve(data);
+                    var boards = data;
+                    if(!includeClosed){
+                        boards = boards.filter(function(b){return !b.closed});
+                    }
+                    defered.resolve(boards);
 		},
 		function(error){
 		    console.error('[SendToTrello]', 'error on authorize', error);
