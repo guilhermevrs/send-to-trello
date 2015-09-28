@@ -5,5 +5,7 @@ var app = angular.module('app', [
 ]);
 
 app.controller('mainController', function($scope, TrelloService){
-    $scope.message = 'teste'
+    $scope.trelloInfo = {
+        currentBoard: 'hue'
+    };
 });
