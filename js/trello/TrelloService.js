@@ -59,7 +59,7 @@ angular.module('app.trello', [])
             Trello.get(
                '/member/me/boards',
                 {
-                    fields: 'name, desc, closed',
+                    fields: 'name,desc,closed',
                     token: this.getLocalToken()
                 },
 		function(data){

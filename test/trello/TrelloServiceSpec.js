@@ -104,7 +104,7 @@ describe('TrelloService', function(){
             expect(Trello.get).toHaveBeenCalled();
             var args = Trello.get.calls.argsFor(0);
             expect(args[0]).toEqual('/member/me/boards');
-            expect(args[1].fields).toEqual('name, desc, closed');
+            expect(args[1].fields).toEqual('name,desc,closed');
             expect(args[1].token).toBeCloseTo(randomFloat);
         });
 
