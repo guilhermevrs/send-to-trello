@@ -54,6 +54,8 @@ angular.module('app.trello', [])
                return false;
             }
 
+            var defered = Promise.defer();
+
             Trello.get(
                '/member/me/boards',
                 {
@@ -61,11 +63,15 @@ angular.module('app.trello', [])
                 },
 		function(data){
                     console.log(data);
+                    defered.resolve(data);
 		},
 		function(error){
 		    console.error('[SendToTrello]', 'error on authorize', error);
+                    defered.reject(error);
 		}
 	    );
+
+            return defered.promise;
         }
     };
 

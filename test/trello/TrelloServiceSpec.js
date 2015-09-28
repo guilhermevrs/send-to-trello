@@ -107,5 +107,12 @@ describe('TrelloService', function(){
                 fields: 'name, desc, closed'
             });
         });
+
+        it('should return a promise', function(){
+            spyOn(Trello, 'get');
+            var p = TrelloService.getBoards(false);
+            var test = p instanceof Promise;
+            expect(test).toBe(true);
+        });
     });
 });
