@@ -54,27 +54,28 @@ angular.module('app.trello', [])
                return false;
             }
 
-            var defered = Promise.defer();
-            Trello.get(
-               '/member/me/boards',
-                {
-                    fields: 'name,desc,closed',
-                    token: this.getLocalToken()
-                },
-		function(data){
-                    var boards = data;
-                    if(!includeClosed){
-                        boards = boards.filter(function(b){return !b.closed});
-                    }
-                    defered.resolve(boards);
-		},
-		function(error){
-		    console.error('[SendToTrello]', 'error on authorize', error);
-                    defered.reject(error);
-		}
-	    );
+            var me = this;
+            var promise = new Promise(function(resolve, fail){
+                Trello.get(
+                    '/member/me/boards',
+                    {
+                        fields: 'name,desc,closed',
+                        token: me.getLocalToken()
+                    },
+		    function(data){
+                        var boards = data;
+                        if(!includeClosed){
+                            boards = boards.filter(function(b){return !b.closed});
+                        }
+                        resolve(boards);
+		    },
+		    function(error){
+		        console.error('[SendToTrello]', 'error on authorize', error);
+                        fail(error);
+		    }
+	        )});
 
-            return defered.promise;
+            return promise;
         }
     };
 
