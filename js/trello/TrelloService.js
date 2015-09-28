@@ -51,7 +51,18 @@ angular.module('app.trello', [])
         getBoards: function(includeClosed){
             if(!this.isUserLogged()){
                this.authorize();
+               return false;
             }
+
+            /*Trello.get({
+
+		success : function(){
+                    //Can't do nothing
+		},
+		error: function(error){
+		    console.error('[SendToTrello]', 'error on authorize', error);
+		}
+	    });*/
         }
     };
 

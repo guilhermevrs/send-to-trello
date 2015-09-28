@@ -79,19 +79,19 @@ describe('TrelloService', function(){
 
     //GET BOARDS
     describe('in retrieving boards', function(){
+        var userLogged = true;
         beforeEach(function(){
-
+            spyOn(TrelloService, 'isUserLogged').and.callFake(function(){return userLogged});
         });
 
         it('should check if the account is connected first', function(){
-            spyOn(TrelloService, 'isUserLogged');
             TrelloService.getBoards(false);
             expect(TrelloService.isUserLogged).toHaveBeenCalled();
         });
 
         it('should redirect to authentication if user not logged', function(){
             spyOn(TrelloService, 'authorize');
-            spyOn(TrelloService, 'isUserLogged').and.returnValue(false);
+            userLogged = false;
             TrelloService.getBoards(false);
             expect(TrelloService.authorize).toHaveBeenCalled();
         });
