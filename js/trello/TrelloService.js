@@ -54,15 +54,18 @@ angular.module('app.trello', [])
                return false;
             }
 
-            /*Trello.get({
-
-		success : function(){
-                    //Can't do nothing
+            Trello.get(
+               '/member/me/boards',
+                {
+                    fields: 'name, desc, closed'
+                },
+		function(data){
+                    console.log(data);
 		},
-		error: function(error){
+		function(error){
 		    console.error('[SendToTrello]', 'error on authorize', error);
 		}
-	    });*/
+	    );
         }
     };
 

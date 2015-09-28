@@ -79,8 +79,9 @@ describe('TrelloService', function(){
 
     //GET BOARDS
     describe('in retrieving boards', function(){
-        var userLogged = true;
+        var userLogged;
         beforeEach(function(){
+            userLogged = true;
             spyOn(TrelloService, 'isUserLogged').and.callFake(function(){return userLogged});
         });
 
@@ -90,11 +91,21 @@ describe('TrelloService', function(){
         });
 
         it('should redirect to authentication if user not logged', function(){
-            spyOn(TrelloService, 'authorize');
+            spyOn(TrelloService, 'authorize').and.returnValue(true);
             userLogged = false;
             TrelloService.getBoards(false);
             expect(TrelloService.authorize).toHaveBeenCalled();
         });
 
+        it('should call trello get with rigth parameters', function(){
+            spyOn(Trello, 'get');
+            TrelloService.getBoards(false);
+            expect(Trello.get).toHaveBeenCalled();
+            var args = Trello.get.calls.argsFor(0);
+            expect(args[0]).toEqual('/member/me/boards');
+            expect(args[1]).toEqual({
+                fields: 'name, desc, closed'
+            });
+        });
     });
 });
