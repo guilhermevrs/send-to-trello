@@ -99,13 +99,13 @@ describe('TrelloService', function(){
 
         it('should call trello get with rigth parameters', function(){
             spyOn(Trello, 'get');
+            localStorage.setItem(TrelloService.LOCAL_STORAGE_AUTH_TOKEN, randomFloat);
             TrelloService.getBoards(false);
             expect(Trello.get).toHaveBeenCalled();
             var args = Trello.get.calls.argsFor(0);
             expect(args[0]).toEqual('/member/me/boards');
-            expect(args[1]).toEqual({
-                fields: 'name, desc, closed'
-            });
+            expect(args[1].fields).toEqual('name, desc, closed');
+            expect(args[1].token).toBeCloseTo(randomFloat);
         });
 
         it('should return a promise', function(){
