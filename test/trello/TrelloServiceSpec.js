@@ -187,6 +187,22 @@ describe('TrelloService', function(){
             var test = p instanceof Promise;
             expect(test).toBe(true);
         });
+
+        it('should return only the lists properties', function(done){
+            var expectedLists = [1,2,3,4,5];
+            spyOn(TrelloService, 'getLocalToken').and.returnValue(randomFloat);
+            spyOn(Trello, 'get').and.callFake(function(path,params,success){
+                success({
+                    name: ''+randomFloat,
+                    lists: expectedLists
+                });
+            });
+            var p = TrelloService.getLists(randomFloat);
+            p.then(function(lists){
+                expect(lists).toEqual(expectedLists);
+                done();
+            });
+        });
     });
 
     });

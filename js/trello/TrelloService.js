@@ -104,8 +104,8 @@ angular.module('app.trello', [])
                         lists: 'open',
                         lists_fields: 'name'
                     },
-		    function(lists){
-                        resolve(lists);
+		    function(board){
+                        resolve(board.lists);
 		    },
 		    function(error){
 		        console.error('[SendToTrello]', 'error on getLists', error);
