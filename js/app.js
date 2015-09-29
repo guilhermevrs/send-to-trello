@@ -12,7 +12,15 @@ app.controller('mainController', function($scope, TrelloService){
                 $scope.trelloInfo.currentBoardId = boards[0].id;
             });
             TrelloService.getLists(boards[0].id).then(function(lists){
-                console.log(lists);
+                $scope.$apply(function(){
+                    if(lists.length > 0){
+                        $scope.trelloInfo.currentList = lists[0].name;
+                        $scope.trelloInfo.currentListId = lists[0].id;
+                    } else {
+                        $scope.trelloInfo.currentList = 'No lists for this board';
+                        $scope.trelloInfo.currentListId = undefined;
+                    }
+                });
             });
         }
     });
