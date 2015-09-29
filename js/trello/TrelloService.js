@@ -80,7 +80,7 @@ angular.module('app.trello', [])
                         resolve(boards);
 		    },
 		    function(error){
-		        console.error('[SendToTrello]', 'error on authorize', error);
+		        console.error('[SendToTrello]', 'error on getBoards', error);
                         fail(error);
 		    }
 	        )});
@@ -90,7 +90,30 @@ angular.module('app.trello', [])
 
         //Get lists for a board
         getLists: function(boardID){
+            if(!this.checkAuthorization()){
+               return false;
+            }
 
+            var me = this;
+            var promise = new Promise(function(resolve, fail){
+                Trello.get(
+                    '/member/me/boards/' + boardID,
+                    {
+                        fields: '',
+                        token: me.getLocalToken(),
+                        lists: 'open',
+                        lists_fields: 'name'
+                    },
+		    function(lists){
+                        resolve(lists);
+		    },
+		    function(error){
+		        console.error('[SendToTrello]', 'error on getLists', error);
+                        fail(error);
+		    }
+	        )});
+
+            return promise;
         }
     };
 

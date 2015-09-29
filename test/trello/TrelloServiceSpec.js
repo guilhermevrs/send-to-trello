@@ -158,7 +158,35 @@ describe('TrelloService', function(){
 
     //GET LISTS
     describe('in retriving the lists from a specific board', function(){
-        beforeEach(function(){});;
+        beforeEach(function(){});
+
+        it('should call checkAuthorization', function(){
+            spyOn(TrelloService, 'checkAuthorization').and.returnValue(false);
+            var lists = TrelloService.getLists(randomFloat);
+            expect(TrelloService.checkAuthorization).toHaveBeenCalled();
+            expect(lists).toBe(false);
+        });
+
+        it('should call trello get with rigth parameters', function(){
+            spyOn(Trello, 'get');
+            localStorage.setItem(TrelloService.LOCAL_STORAGE_AUTH_TOKEN, randomFloat);
+            var randomBoardID = Math.random();
+            TrelloService.getLists(randomBoardID);
+            expect(Trello.get).toHaveBeenCalled();
+            var args = Trello.get.calls.argsFor(0);
+            expect(args[0]).toEqual('/member/me/boards/' + randomBoardID);
+            expect(args[1].fields).toEqual('');
+            expect(args[1].lists).toEqual('open');
+            expect(args[1].lists_fields).toEqual('name');
+            expect(args[1].token).toBeCloseTo(randomFloat);
+        });
+
+        it('should return a promise', function(){
+            spyOn(Trello, 'get');
+            var p = TrelloService.getLists(randomFloat);
+            var test = p instanceof Promise;
+            expect(test).toBe(true);
+        });
     });
 
     });
