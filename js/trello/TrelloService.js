@@ -30,6 +30,7 @@ angular.module('app.trello', [])
             return localAuthToken !== null && localAuthToken !== undefined;
         },
 
+        //Starts authorization process
         authorize: function(){
 	    var me = this;
             var interactive = !this.isUserLogged();
@@ -48,9 +49,18 @@ angular.module('app.trello', [])
 	    });
         },
 
-        getBoards: function(includeClosed){
-            if(!this.isUserLogged()){
+        //Checks if the user is authorized
+        checkAuthorization: function(){
+            var isUserLogged = this.isUserLogged();
+            if(!isUserLogged){
                this.authorize();
+            }
+            return isUserLogged;
+        },
+
+        //Get boards for logged user
+        getBoards: function(includeClosed){
+            if(!this.checkAuthorization()){
                return false;
             }
 
@@ -76,6 +86,11 @@ angular.module('app.trello', [])
 	        )});
 
             return promise;
+        },
+
+        //Get lists for a board
+        getLists: function(boardID){
+
         }
     };
 

@@ -77,25 +77,42 @@ describe('TrelloService', function(){
         });
     });
 
-    //GET BOARDS
-    describe('in retrieving boards', function(){
+    describe('in logged operations', function(){
         var userLogged;
         beforeEach(function(){
             userLogged = true;
             spyOn(TrelloService, 'isUserLogged').and.callFake(function(){return userLogged});
         });
 
-        it('should check if the account is connected first', function(){
-            spyOn(Trello, 'get');
-            TrelloService.getBoards(false);
-            expect(TrelloService.isUserLogged).toHaveBeenCalled();
+        describe('in checkingAuthorization', function(){
+            it('should check if the user is loggedIn', function(){
+                userLogged = true;
+                var f = TrelloService.checkAuthorization();
+                expect(TrelloService.isUserLogged).toHaveBeenCalled();
+            });
+
+            it('should return the status of the isUserLogged', function(){
+                userLogged = ((10 * randomFloat) >= 5);
+                var f = TrelloService.checkAuthorization();
+                expect(f).toBe(userLogged);
+            });
+
+            it('should call authorize if the user is not logged in', function(){
+                userLogged = false;
+                spyOn(TrelloService, 'authorize').and.returnValue(true);
+                TrelloService.checkAuthorization();
+                expect(TrelloService.authorize).toHaveBeenCalled();
+            });
         });
 
-        it('should redirect to authentication if user not logged', function(){
-            spyOn(TrelloService, 'authorize').and.returnValue(true);
-            userLogged = false;
-            TrelloService.getBoards(false);
-            expect(TrelloService.authorize).toHaveBeenCalled();
+    //GET BOARDS
+    describe('in retrieving boards', function(){
+
+        it('should call checkAuthorization', function(){
+            spyOn(TrelloService, 'checkAuthorization').and.returnValue(false);
+            var boards = TrelloService.getBoards(false);
+            expect(TrelloService.checkAuthorization).toHaveBeenCalled();
+            expect(boards).toBe(false);
         });
 
         it('should call trello get with rigth parameters', function(){
@@ -137,5 +154,12 @@ describe('TrelloService', function(){
                 done();
             });
         });
+    });
+
+    //GET LISTS
+    describe('in retriving the lists from a specific board', function(){
+        beforeEach(function(){});;
+    });
+
     });
 });
