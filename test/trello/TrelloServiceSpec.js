@@ -174,8 +174,8 @@ describe('TrelloService', function(){
             TrelloService.getLists(randomBoardID);
             expect(Trello.get).toHaveBeenCalled();
             var args = Trello.get.calls.argsFor(0);
-            expect(args[0]).toEqual('/member/me/boards/' + randomBoardID);
-            expect(args[1].fields).toEqual('');
+            expect(args[0]).toEqual('/boards/' + randomBoardID);
+            expect(args[1].fields).toEqual('name');
             expect(args[1].lists).toEqual('open');
             expect(args[1].lists_fields).toEqual('name');
             expect(args[1].token).toBeCloseTo(randomFloat);

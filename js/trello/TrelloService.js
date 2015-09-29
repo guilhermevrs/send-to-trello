@@ -97,9 +97,9 @@ angular.module('app.trello', [])
             var me = this;
             var promise = new Promise(function(resolve, fail){
                 Trello.get(
-                    '/member/me/boards/' + boardID,
+                    '/boards/' + boardID,
                     {
-                        fields: '',
+                        fields: 'name',
                         token: me.getLocalToken(),
                         lists: 'open',
                         lists_fields: 'name'

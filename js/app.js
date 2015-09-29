@@ -11,6 +11,9 @@ app.controller('mainController', function($scope, TrelloService){
                 $scope.trelloInfo.currentBoard = boards[0].name;
                 $scope.trelloInfo.currentBoardId = boards[0].id;
             });
+            TrelloService.getLists(boards[0].id).then(function(lists){
+                console.log(lists);
+            });
         }
     });
 
