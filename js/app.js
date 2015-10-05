@@ -1,7 +1,8 @@
 'use strict'
 
 var app = angular.module('app', [
-    'app.trello'
+    'app.trello',
+    'app.pagehandler'
 ]);
 
 app.controller('mainController', function($scope, TrelloService){
