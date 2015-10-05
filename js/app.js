@@ -5,7 +5,13 @@ var app = angular.module('app', [
     'app.pagehandler'
 ]);
 
-app.controller('mainController', function($scope, TrelloService){
+app.controller('mainController', function($scope, TrelloService, PageHandler){
+    PageHandler.getPageInfo().then(function(pageInfo){
+        $scope.$apply(function(){
+            $scope.pageInfo = pageInfo;
+        });
+    });
+
     TrelloService.getBoards(false).then(function(boards){
         if(boards.length > 0){
             $scope.$apply(function(){

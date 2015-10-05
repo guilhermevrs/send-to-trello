@@ -52,7 +52,7 @@ angular.module('app.trello', [])
         //Checks if the user is authorized
         checkAuthorization: function(){
             var isUserLogged = this.isUserLogged();
-            if(!isUserLogged){
+           if(!isUserLogged){
                this.authorize();
             }
             return isUserLogged;
